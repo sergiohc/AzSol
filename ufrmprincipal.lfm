@@ -1,0 +1,9 @@
+object frmPrincipal: TfrmPrincipal
+  Left = 277
+  Height = 240
+  Top = 330
+  Width = 320
+  Caption = 'frmPrincipal'
+  LCLVersion = '1.8.4.0'
+  WindowState = wsMaximized
+end

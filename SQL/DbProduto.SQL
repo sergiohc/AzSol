@@ -1,0 +1,32 @@
+/* Script para Criar tabela: */
+
+    CREATE TABLE PRODUTOS
+    (
+    CODIGO integer NOT NULL,
+    DESCRICAO varchar(50),
+	CODGRUPO integer Default 0,
+	ESTOQUE DECIMAL(9,3) DEFAULT 0.00,	
+	CUSTO DECIMAL(9,2) DEFAULT 0.00,	
+	LUCRO DECIMAL(9,4) DEFAULT 0.00,	
+	VENDA DECIMAL(9,2) DEFAULT 0.00,	
+    CONSTRAINT PK_CODPRO PRIMARY KEY (CODIGO),
+    CONSTRAINT UK_PRODESC UNIQUE (DESCRICAO)
+    USING INDEX IX_PRODESC
+    );
+
+/* Script para Criar Generator: */
+
+
+    CREATE GENERATOR CODPRO_GEN;
+
+/* Script para Criar Trigger (Gatilho): */
+
+    SET TERM ^ ;
+    CREATE TRIGGER CODPRO FOR PRODUTOS ACTIVE
+    BEFORE INSERT POSITION 0
+    AS
+    BEGIN
+    	new.CODIGO = gen_id( CODPRO_GEN, 1 );
+    END^
+    SET TERM ; ^
+

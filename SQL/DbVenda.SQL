@@ -1,0 +1,22 @@
+create table VENDA(
+NoVENDA integer not null,
+CODCLI integer,
+OBS  varchar(50),
+DATAVENDA date,
+HORAVENDA VARCHAR(10),
+ESTACAO VARCHAR(15),
+SUBTOTAL numeric(10,2),
+DESC_ACRES numeric(10,2),
+TOTAL numeric(10,2),
+constraint pk_VENDA primary key (NoVENDA));
+
+CREATE GENERATOR CODVEN_GEN;
+
+SET TERM ^ ;
+  CREATE TRIGGER CODVEN FOR VENDA ACTIVE
+  BEFORE INSERT POSITION 0
+  AS
+   BEGIN
+  	new.NOVENDA = gen_id( CODVEN_GEN, 1 );
+   END^
+  SET TERM ; ^
