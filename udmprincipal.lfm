@@ -1,0 +1,27 @@
+object dmPrincipal: TdmPrincipal
+  OldCreateOrder = False
+  Height = 397
+  HorizontalOffset = 330
+  VerticalOffset = 175
+  Width = 541
+  PPI = 96
+  object ibConnection: TIBConnection
+    Connected = False
+    LoginPrompt = False
+    DatabaseName = '/home/mint/App/portifolio/Lazarus/AzSol/Dados/DB'
+    KeepConnection = False
+    Password = '993711'
+    Transaction = sqlTransaction
+    UserName = 'SYSDBA'
+    HostName = 'localhost'
+    CheckTransactionParams = False
+    left = 40
+    top = 32
+  end
+  object sqlTransaction: TSQLTransaction
+    Active = False
+    Database = ibConnection
+    left = 152
+    top = 32
+  end
+end
