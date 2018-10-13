@@ -37,7 +37,7 @@
       <Unit1>
         <Filename Value="ufrmprincipal.pas"/>
         <IsPartOfProject Value="True"/>
-        <ComponentName Value="Form1"/>
+        <ComponentName Value="frmPrincipal"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="ufrmPrincipal"/>
       </Unit1>

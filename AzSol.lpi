@@ -24,12 +24,15 @@
         <FormatVersion Value="1"/>
       </local>
     </RunParams>
-    <RequiredPackages Count="1">
+    <RequiredPackages Count="2">
       <Item1>
-        <PackageName Value="LCL"/>
+        <PackageName Value="FCL"/>
       </Item1>
+      <Item2>
+        <PackageName Value="LCL"/>
+      </Item2>
     </RequiredPackages>
-    <Units Count="2">
+    <Units Count="3">
       <Unit0>
         <Filename Value="AzSol.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -41,6 +44,13 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="ufrmPrincipal"/>
       </Unit1>
+      <Unit2>
+        <Filename Value="udmprincipal.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="dmPrincipal"/>
+        <ResourceBaseClass Value="DataModule"/>
+        <UnitName Value="udmPrincipal"/>
+      </Unit2>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

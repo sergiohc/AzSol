@@ -1,12 +1,13 @@
 object dmPrincipal: TdmPrincipal
+  OnCreate = DataModuleCreate
   OldCreateOrder = False
   Height = 397
-  HorizontalOffset = 330
-  VerticalOffset = 175
-  Width = 541
+  HorizontalOffset = 306
+  VerticalOffset = 211
+  Width = 682
   PPI = 96
   object ibConnection: TIBConnection
-    Connected = False
+    Connected = True
     LoginPrompt = False
     DatabaseName = '/home/mint/App/portifolio/Lazarus/AzSol/Dados/DB'
     KeepConnection = False
@@ -19,9 +20,1083 @@ object dmPrincipal: TdmPrincipal
     top = 32
   end
   object sqlTransaction: TSQLTransaction
-    Active = False
+    Active = True
     Database = ibConnection
     left = 152
     top = 32
+  end
+  object qryClientes: TSQLQuery
+    IndexName = 'DEFAULT_ORDER'
+    FieldDefs = <    
+      item
+        Name = 'CODIGO'
+        DataType = ftInteger
+        Precision = -1
+      end    
+      item
+        Name = 'NOME'
+        DataType = ftString
+        Precision = -1
+        Size = 50
+      end    
+      item
+        Name = 'ENDERECO'
+        DataType = ftString
+        Precision = -1
+        Size = 50
+      end    
+      item
+        Name = 'BAIRRO'
+        DataType = ftString
+        Precision = -1
+        Size = 30
+      end    
+      item
+        Name = 'CIDADE'
+        DataType = ftString
+        Precision = -1
+        Size = 50
+      end    
+      item
+        Name = 'UF'
+        DataType = ftString
+        Precision = -1
+        Size = 2
+      end    
+      item
+        Name = 'CEP'
+        DataType = ftString
+        Precision = -1
+        Size = 10
+      end    
+      item
+        Name = 'TELEFONE'
+        DataType = ftString
+        Precision = -1
+        Size = 15
+      end>
+    AfterPost = qryClientesAfterPost
+    Database = ibConnection
+    Transaction = sqlTransaction
+    SQL.Strings = (
+      'select * from CLIENTES'
+    )
+    Params = <>
+    UpdateMode = upWhereAll
+    left = 48
+    top = 104
+    object qryClientesCODIGO: TLongintField
+      FieldKind = fkData
+      FieldName = 'CODIGO'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+    end
+    object qryClientesNOME: TStringField
+      FieldKind = fkData
+      FieldName = 'NOME'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 50
+    end
+    object qryClientesENDERECO: TStringField
+      FieldKind = fkData
+      FieldName = 'ENDERECO'
+      Index = 2
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 50
+    end
+    object qryClientesBAIRRO: TStringField
+      FieldKind = fkData
+      FieldName = 'BAIRRO'
+      Index = 3
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 30
+    end
+    object qryClientesCIDADE: TStringField
+      FieldKind = fkData
+      FieldName = 'CIDADE'
+      Index = 4
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 50
+    end
+    object qryClientesUF: TStringField
+      FieldKind = fkData
+      FieldName = 'UF'
+      Index = 5
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 2
+    end
+    object qryClientesCEP: TStringField
+      FieldKind = fkData
+      FieldName = 'CEP'
+      Index = 6
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 10
+    end
+    object qryClientesTELEFONE: TStringField
+      FieldKind = fkData
+      FieldName = 'TELEFONE'
+      Index = 7
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 15
+    end
+  end
+  object qryFormaPGTO: TSQLQuery
+    FieldDefs = <    
+      item
+        Name = 'CODIGO'
+        DataType = ftInteger
+        Precision = -1
+      end    
+      item
+        Name = 'DESCRICAO'
+        DataType = ftString
+        Precision = -1
+        Size = 50
+      end>
+    AfterPost = qryFormaPGTOAfterPost
+    Database = ibConnection
+    Transaction = sqlTransaction
+    SQL.Strings = (
+      'SELECT * FROM FORMAPGTO'
+    )
+    Params = <>
+    UpdateMode = upWhereAll
+    left = 424
+    top = 232
+    object qryFormaPGTOCODIGO: TLongintField
+      FieldKind = fkData
+      FieldName = 'CODIGO'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+    end
+    object qryFormaPGTODESCRICAO: TStringField
+      FieldKind = fkData
+      FieldName = 'DESCRICAO'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 50
+    end
+  end
+  object qryGrupos: TSQLQuery
+    FieldDefs = <    
+      item
+        Name = 'CODIGO'
+        DataType = ftInteger
+        Precision = -1
+      end    
+      item
+        Name = 'DESCRICAO'
+        DataType = ftString
+        Precision = -1
+        Size = 50
+      end>
+    Database = ibConnection
+    Transaction = sqlTransaction
+    SQL.Strings = (
+      'SELECT * FROM GRUPOS'
+    )
+    Params = <>
+    UpdateMode = upWhereAll
+    left = 136
+    top = 224
+    object qryGruposCODIGO: TLongintField
+      FieldKind = fkData
+      FieldName = 'CODIGO'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+    end
+    object qryGruposDESCRICAO: TStringField
+      FieldKind = fkData
+      FieldName = 'DESCRICAO'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 50
+    end
+  end
+  object qryFornecedores: TSQLQuery
+    FieldDefs = <    
+      item
+        Name = 'CODIGO'
+        DataType = ftInteger
+        Precision = -1
+      end    
+      item
+        Name = 'NOME'
+        DataType = ftString
+        Precision = -1
+        Size = 50
+      end    
+      item
+        Name = 'ENDERECO'
+        DataType = ftString
+        Precision = -1
+        Size = 50
+      end    
+      item
+        Name = 'BAIRRO'
+        DataType = ftString
+        Precision = -1
+        Size = 30
+      end    
+      item
+        Name = 'CIDADE'
+        DataType = ftString
+        Precision = -1
+        Size = 50
+      end    
+      item
+        Name = 'UF'
+        DataType = ftString
+        Precision = -1
+        Size = 2
+      end    
+      item
+        Name = 'CEP'
+        DataType = ftString
+        Precision = -1
+        Size = 10
+      end    
+      item
+        Name = 'TELEFONE'
+        DataType = ftString
+        Precision = -1
+        Size = 15
+      end>
+    AfterPost = qryFornecedoresAfterPost
+    Database = ibConnection
+    Transaction = sqlTransaction
+    SQL.Strings = (
+      'SELECT * FROM FORNECEDORES'
+    )
+    Params = <>
+    UpdateMode = upWhereAll
+    left = 136
+    top = 104
+    object qryFornecedoresCODIGO: TLongintField
+      FieldKind = fkData
+      FieldName = 'CODIGO'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+    end
+    object qryFornecedoresNOME: TStringField
+      FieldKind = fkData
+      FieldName = 'NOME'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 50
+    end
+    object qryFornecedoresENDERECO: TStringField
+      FieldKind = fkData
+      FieldName = 'ENDERECO'
+      Index = 2
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 50
+    end
+    object qryFornecedoresBAIRRO: TStringField
+      FieldKind = fkData
+      FieldName = 'BAIRRO'
+      Index = 3
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 30
+    end
+    object qryFornecedoresCIDADE: TStringField
+      FieldKind = fkData
+      FieldName = 'CIDADE'
+      Index = 4
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 50
+    end
+    object qryFornecedoresUF: TStringField
+      FieldKind = fkData
+      FieldName = 'UF'
+      Index = 5
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 2
+    end
+    object qryFornecedoresCEP: TStringField
+      FieldKind = fkData
+      FieldName = 'CEP'
+      Index = 6
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 10
+    end
+    object qryFornecedoresTELEFONE: TStringField
+      FieldKind = fkData
+      FieldName = 'TELEFONE'
+      Index = 7
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 15
+    end
+  end
+  object qryVendas: TSQLQuery
+    FieldDefs = <    
+      item
+        Name = 'NOVENDA'
+        DataType = ftInteger
+        Precision = -1
+      end    
+      item
+        Name = 'CODCLI'
+        DataType = ftInteger
+        Precision = -1
+      end    
+      item
+        Name = 'OBS'
+        DataType = ftString
+        Precision = -1
+        Size = 50
+      end    
+      item
+        Name = 'DATAVENDA'
+        DataType = ftDate
+        Precision = -1
+      end    
+      item
+        Name = 'HORAVENDA'
+        DataType = ftString
+        Precision = -1
+        Size = 10
+      end    
+      item
+        Name = 'ESTACAO'
+        DataType = ftString
+        Precision = -1
+        Size = 15
+      end    
+      item
+        Name = 'SUBTOTAL'
+        DataType = ftBCD
+        Precision = 18
+        Size = 2
+      end    
+      item
+        Name = 'DESC_ACRES'
+        DataType = ftBCD
+        Precision = 18
+        Size = 2
+      end    
+      item
+        Name = 'TOTAL'
+        DataType = ftBCD
+        Precision = 18
+        Size = 2
+      end>
+    AfterPost = qryVendasAfterPost
+    Database = ibConnection
+    Transaction = sqlTransaction
+    SQL.Strings = (
+      'SELECT * FROM VENDA'
+    )
+    Params = <>
+    UpdateMode = upWhereAll
+    left = 424
+    top = 160
+    object qryVendasNOVENDA: TLongintField
+      FieldKind = fkData
+      FieldName = 'NOVENDA'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+    end
+    object qryVendasCODCLI: TLongintField
+      FieldKind = fkData
+      FieldName = 'CODCLI'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object qryVendasOBS: TStringField
+      FieldKind = fkData
+      FieldName = 'OBS'
+      Index = 2
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 50
+    end
+    object qryVendasDATAVENDA: TDateField
+      FieldKind = fkData
+      FieldName = 'DATAVENDA'
+      Index = 3
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object qryVendasHORAVENDA: TStringField
+      FieldKind = fkData
+      FieldName = 'HORAVENDA'
+      Index = 4
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 10
+    end
+    object qryVendasESTACAO: TStringField
+      FieldKind = fkData
+      FieldName = 'ESTACAO'
+      Index = 5
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 15
+    end
+    object qryVendasSUBTOTAL: TBCDField
+      FieldKind = fkData
+      FieldName = 'SUBTOTAL'
+      Index = 6
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Precision = 18
+      Currency = False
+      MaxValue = 0
+      MinValue = 0
+      Size = 2
+    end
+    object qryVendasDESC_ACRES: TBCDField
+      FieldKind = fkData
+      FieldName = 'DESC_ACRES'
+      Index = 7
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Precision = 18
+      Currency = False
+      MaxValue = 0
+      MinValue = 0
+      Size = 2
+    end
+    object qryVendasTOTAL: TBCDField
+      FieldKind = fkData
+      FieldName = 'TOTAL'
+      Index = 8
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Precision = 18
+      Currency = False
+      MaxValue = 0
+      MinValue = 0
+      Size = 2
+    end
+  end
+  object qryVendaItens: TSQLQuery
+    FieldDefs = <    
+      item
+        Name = 'CODPRO'
+        DataType = ftInteger
+        Precision = -1
+      end    
+      item
+        Name = 'VENDAI'
+        DataType = ftInteger
+        Precision = -1
+      end    
+      item
+        Name = 'QTDE'
+        DataType = ftBCD
+        Precision = 18
+        Size = 3
+      end    
+      item
+        Name = 'UNITARIO'
+        DataType = ftBCD
+        Precision = 18
+        Size = 2
+      end    
+      item
+        Name = 'TOTAL'
+        DataType = ftBCD
+        Precision = 18
+        Size = 2
+      end>
+    AfterPost = qryVendaItensAfterPost
+    Database = ibConnection
+    Transaction = sqlTransaction
+    SQL.Strings = (
+      'SELECT * FROM VENDAITEM'
+    )
+    Params = <>
+    UpdateMode = upWhereAll
+    left = 336
+    top = 232
+    object qryVendaItensCODPRO: TLongintField
+      FieldKind = fkData
+      FieldName = 'CODPRO'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+    end
+    object qryVendaItensVENDAI: TLongintField
+      FieldKind = fkData
+      FieldName = 'VENDAI'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+    end
+    object qryVendaItensQTDE: TBCDField
+      FieldKind = fkData
+      FieldName = 'QTDE'
+      Index = 2
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Precision = 18
+      Currency = False
+      MaxValue = 0
+      MinValue = 0
+      Size = 3
+    end
+    object qryVendaItensUNITARIO: TBCDField
+      FieldKind = fkData
+      FieldName = 'UNITARIO'
+      Index = 3
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Precision = 18
+      Currency = False
+      MaxValue = 0
+      MinValue = 0
+      Size = 2
+    end
+    object qryVendaItensTOTAL: TBCDField
+      FieldKind = fkData
+      FieldName = 'TOTAL'
+      Index = 4
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Precision = 18
+      Currency = False
+      MaxValue = 0
+      MinValue = 0
+      Size = 2
+    end
+  end
+  object qryEstoque: TSQLQuery
+    FieldDefs = <    
+      item
+        Name = 'NOLCTO'
+        DataType = ftInteger
+        Precision = -1
+      end    
+      item
+        Name = 'CODFOR'
+        DataType = ftInteger
+        Precision = -1
+      end    
+      item
+        Name = 'DOCTO'
+        DataType = ftString
+        Precision = -1
+        Size = 50
+      end    
+      item
+        Name = 'ENTRADA'
+        DataType = ftDate
+        Precision = -1
+      end    
+      item
+        Name = 'TOTAL'
+        DataType = ftBCD
+        Precision = 18
+        Size = 2
+      end>
+    AfterPost = qryEstoqueAfterPost
+    Database = ibConnection
+    Transaction = sqlTransaction
+    SQL.Strings = (
+      'SELECT * FROM ESTOQUE'
+    )
+    Params = <>
+    UpdateMode = upWhereAll
+    left = 288
+    top = 32
+    object qryEstoqueNOLCTO: TLongintField
+      FieldKind = fkData
+      FieldName = 'NOLCTO'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+    end
+    object qryEstoqueCODFOR: TLongintField
+      FieldKind = fkData
+      FieldName = 'CODFOR'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object qryEstoqueDOCTO: TStringField
+      FieldKind = fkData
+      FieldName = 'DOCTO'
+      Index = 2
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 50
+    end
+    object qryEstoqueENTRADA: TDateField
+      FieldKind = fkData
+      FieldName = 'ENTRADA'
+      Index = 3
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object qryEstoqueTOTAL: TBCDField
+      FieldKind = fkData
+      FieldName = 'TOTAL'
+      Index = 4
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Precision = 18
+      Currency = False
+      MaxValue = 0
+      MinValue = 0
+      Size = 2
+    end
+  end
+  object qryVendaFormaPGTO: TSQLQuery
+    FieldDefs = <    
+      item
+        Name = 'CODPGTO'
+        DataType = ftInteger
+        Precision = -1
+      end    
+      item
+        Name = 'VENDAP'
+        DataType = ftInteger
+        Precision = -1
+      end    
+      item
+        Name = 'VALOR'
+        DataType = ftBCD
+        Precision = 18
+        Size = 2
+      end>
+    AfterPost = qryVendaFormaPGTOAfterPost
+    Database = ibConnection
+    Transaction = sqlTransaction
+    SQL.Strings = (
+      'SELECT * FROM VENDAPGTO'
+    )
+    Params = <>
+    UpdateMode = upWhereAll
+    left = 536
+    top = 232
+    object qryVendaFormaPGTOCODPGTO: TLongintField
+      FieldKind = fkData
+      FieldName = 'CODPGTO'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+    end
+    object qryVendaFormaPGTOVENDAP: TLongintField
+      FieldKind = fkData
+      FieldName = 'VENDAP'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+    end
+    object qryVendaFormaPGTOVALOR: TBCDField
+      FieldKind = fkData
+      FieldName = 'VALOR'
+      Index = 2
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Precision = 18
+      Currency = False
+      MaxValue = 0
+      MinValue = 0
+      Size = 2
+    end
+  end
+  object qryEstoqueItem: TSQLQuery
+    FieldDefs = <    
+      item
+        Name = 'CODPRO'
+        DataType = ftInteger
+        Precision = -1
+      end    
+      item
+        Name = 'LCTOI'
+        DataType = ftInteger
+        Precision = -1
+      end    
+      item
+        Name = 'QTDE'
+        DataType = ftBCD
+        Precision = 18
+        Size = 3
+      end    
+      item
+        Name = 'UNITARIO'
+        DataType = ftBCD
+        Precision = 18
+        Size = 2
+      end    
+      item
+        Name = 'TOTAL'
+        DataType = ftBCD
+        Precision = 18
+        Size = 2
+      end>
+    AfterOpen = qryEstoqueItemAfterOpen
+    Database = ibConnection
+    Transaction = sqlTransaction
+    SQL.Strings = (
+      'SELECT * FROM ESTOQUEITEM'
+    )
+    Params = <>
+    UpdateMode = upWhereAll
+    left = 360
+    top = 32
+    object qryEstoqueItemCODPRO: TLongintField
+      FieldKind = fkData
+      FieldName = 'CODPRO'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+    end
+    object qryEstoqueItemLCTOI: TLongintField
+      FieldKind = fkData
+      FieldName = 'LCTOI'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+    end
+    object qryEstoqueItemQTDE: TBCDField
+      FieldKind = fkData
+      FieldName = 'QTDE'
+      Index = 2
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Precision = 18
+      Currency = False
+      MaxValue = 0
+      MinValue = 0
+      Size = 3
+    end
+    object qryEstoqueItemUNITARIO: TBCDField
+      FieldKind = fkData
+      FieldName = 'UNITARIO'
+      Index = 3
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Precision = 18
+      Currency = False
+      MaxValue = 0
+      MinValue = 0
+      Size = 2
+    end
+    object qryEstoqueItemTOTAL: TBCDField
+      FieldKind = fkData
+      FieldName = 'TOTAL'
+      Index = 4
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Precision = 18
+      Currency = False
+      MaxValue = 0
+      MinValue = 0
+      Size = 2
+    end
+  end
+  object qryProdutos: TSQLQuery
+    FieldDefs = <    
+      item
+        Name = 'CODIGO'
+        DataType = ftInteger
+        Precision = -1
+      end    
+      item
+        Name = 'DESCRICAO'
+        DataType = ftString
+        Precision = -1
+        Size = 50
+      end    
+      item
+        Name = 'CODGRUPO'
+        DataType = ftInteger
+        Precision = -1
+      end    
+      item
+        Name = 'ESTOQUE'
+        DataType = ftBCD
+        Precision = 9
+        Size = 3
+      end    
+      item
+        Name = 'CUSTO'
+        DataType = ftBCD
+        Precision = 9
+        Size = 2
+      end    
+      item
+        Name = 'LUCRO'
+        DataType = ftBCD
+        Precision = 9
+        Size = 4
+      end    
+      item
+        Name = 'VENDA'
+        DataType = ftBCD
+        Precision = 9
+        Size = 2
+      end>
+    AfterPost = qryProdutosAfterPost
+    Database = ibConnection
+    Transaction = sqlTransaction
+    SQL.Strings = (
+      'SELECT * FROM PRODUTOS'
+    )
+    RefreshSQL.Strings = (
+      'SELECT * FROM PRODUTOS'
+    )
+    Params = <>
+    UpdateMode = upWhereAll
+    left = 48
+    top = 224
+    object qryProdutosCODIGO: TLongintField
+      FieldKind = fkData
+      FieldName = 'CODIGO'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+    end
+    object qryProdutosDESCRICAO: TStringField
+      FieldKind = fkData
+      FieldName = 'DESCRICAO'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 50
+    end
+    object qryProdutosCODGRUPO: TLongintField
+      FieldKind = fkData
+      FieldName = 'CODGRUPO'
+      Index = 2
+      KeyFields = 'CODIGO'
+      LookupCache = False
+      LookupDataSet = qryGrupos
+      LookupKeyFields = 'DESCRICAO'
+      LookupResultField = 'CODIGO'
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object qryProdutosESTOQUE: TBCDField
+      FieldKind = fkData
+      FieldName = 'ESTOQUE'
+      Index = 3
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Precision = 9
+      Currency = False
+      MaxValue = 0
+      MinValue = 0
+      Size = 3
+    end
+    object qryProdutosCUSTO: TBCDField
+      FieldKind = fkData
+      FieldName = 'CUSTO'
+      Index = 4
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Precision = 9
+      Currency = False
+      MaxValue = 0
+      MinValue = 0
+      Size = 2
+    end
+    object qryProdutosLUCRO: TBCDField
+      FieldKind = fkData
+      FieldName = 'LUCRO'
+      Index = 5
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Precision = 9
+      Currency = False
+      MaxValue = 0
+      MinValue = 0
+    end
+    object qryProdutosVENDA: TBCDField
+      FieldKind = fkData
+      FieldName = 'VENDA'
+      Index = 6
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Precision = 9
+      Currency = False
+      MaxValue = 0
+      MinValue = 0
+      Size = 2
+    end
+  end
+  object dsClientes: TDataSource
+    DataSet = qryClientes
+    left = 48
+    top = 152
+  end
+  object dsFornecedores: TDataSource
+    DataSet = qryFornecedores
+    left = 136
+    top = 152
+  end
+  object dsEstoque: TDataSource
+    DataSet = qryEstoque
+    left = 288
+    top = 88
+  end
+  object dsEstoqueItem: TDataSource
+    DataSet = qryEstoqueItem
+    left = 360
+    top = 88
+  end
+  object dsProdutos: TDataSource
+    DataSet = qryProdutos
+    left = 48
+    top = 280
+  end
+  object dsGrupos: TDataSource
+    DataSet = qryGrupos
+    left = 136
+    top = 280
+  end
+  object dsVendas: TDataSource
+    DataSet = qryVendas
+    left = 496
+    top = 160
+  end
+  object dsFormaPGTO: TDataSource
+    DataSet = qryFormaPGTO
+    left = 424
+    top = 280
+  end
+  object dsVendaFromaPGTO: TDataSource
+    DataSet = qryVendaFormaPGTO
+    left = 536
+    top = 280
+  end
+  object dsVendaItens: TDataSource
+    DataSet = qryVendaItens
+    left = 336
+    top = 280
   end
 end
